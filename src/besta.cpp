@@ -7,7 +7,7 @@ Besta::Besta(int vida,
 				int espirito, 
 				int vitalidade, 
 				int furia):
-					Magico(forca, espirito, vitalidade),
+					Monstro(vida, forca, espirito, vitalidade),
 					furia(furia)
 					{}
 

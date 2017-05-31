@@ -2,12 +2,11 @@
 #define _BESTAS_HPP_
 
 #include <iostream>
-#include <string>
-#include "mostro.h"
+#include "monstro.h"
 
 using namespace std;
 
-class Besta: public Mostro{
+class Besta: public Monstro{
 private:
 	int furia;
 public:

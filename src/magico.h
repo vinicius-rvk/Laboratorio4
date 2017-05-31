@@ -1,21 +1,21 @@
 #ifndef _MAGICO_HPP_
 #define _MAGICO_HPP_
 
-#include "mostro.h"
+#include "monstro.h"
 
 using namespace std;
 
 class Magico: public Monstro
 {
 private:
-	int agilidade;
+	int magic_point;
 public:
 	Magico();
 	Magico(int, int, int, int, int);
 
-	int getAgilidade();
+	int getMagic_point();
 
-	void setAgilidade(int);
+	void setMagic_point(int);
 
 	//friend ostream& operator<<(ostream&, Magico&);
 

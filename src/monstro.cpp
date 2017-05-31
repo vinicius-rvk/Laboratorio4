@@ -27,6 +27,6 @@ void Monstro::setEspirito(int espirito){this->espirito = espirito;}
 void Monstro::setVitalidade(int vitalidade){this->vitalidade = vitalidade;}
 
 	//SOBRECARGA DE OPERADORES
-friend ostream& operator<<(ostream&, Monstro&);
+//friend ostream& operator<<(ostream&, Monstro&);
 
-friend istream& operator>>(istream&, Monstro&);
+//friend istream& operator>>(istream&, Monstro&);

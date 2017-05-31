@@ -7,14 +7,14 @@ Magico::Magico(int vida,
 				int forca, 
 				int espirito, 
 				int vitalidade, 
-				int agilidadde):
+				int magic_point):
 					Magico(forca, espirito, vitalidade),
-					agilidade(agilidade)
+					magic_point(magic_point)
 					{}
 
-int Besta::getAgilidade(){return this->agilidade;}
+int Besta::getMagic_point(){return this->magic_point;}
 
-void Besta::setAgilidade(int agilidade){this->agilidade = agilidade;}
+void Besta::setMagic_point(int magic_point){this->magic_point = magic_point;}
 
 //friend ostream& operator<<(ostream&, Magico&);
 
