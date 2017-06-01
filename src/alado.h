@@ -8,10 +8,11 @@ using namespace std;
 
 class Alado: public Monstro{
 private:
+	string nome;
 	int agilidade;
 public:
 	Alado();
-	Alado(int, int, int, int, int);
+	Alado(int, int, int, int, string, int);
 
 	int getAgilidade();
 

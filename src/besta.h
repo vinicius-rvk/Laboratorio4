@@ -8,13 +8,16 @@ using namespace std;
 
 class Besta: public Monstro{
 private:
+	string nome;
 	int furia;
 public:
 	Besta();
-	Besta(int, int, int, int, int);
+	Besta(int, int, int, int, string, int);
 
+	string getNome();
 	int getFuria();
 
+	void setNome(string);
 	void setFuria(int);
 
 	//friend ostream& operator<<(ostream&, Besta&);

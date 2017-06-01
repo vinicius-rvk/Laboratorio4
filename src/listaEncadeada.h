@@ -6,9 +6,10 @@
 #ifndef _LISTA_H_ // Uso do pré-processador
 #define _LISTA_H_ // Definição do identificador do cabeçalho
 
-#include "emprestimo.h"
-#include "usuario.h"
-#include "livro.h"
+#include "alado.h"
+#include "besta.h"
+#include "magico.h"
+#include "monstro.h"
 #include <vector>
 #include <fstream>
 
