@@ -8,7 +8,7 @@ Alado::Alado(int vida,
 				int vitalidade, 
 				int agilidade)
 					:
-					Mostro(forca, espirito, vitalidade),
+					Monstro(vida, forca, espirito, vitalidade),
 					agilidade(agilidade)
 					{}
 

@@ -1,11 +1,8 @@
 #include "monstro.h"
+
 using namespace std;
 
-Monstro::Monstro():
-			vida(0),
-			forca(0),
-			espirito(0),
-			vitalidade(0)
+Monstro::Monstro()
 			{}
 Monstro::Monstro(int vida, int forca, int espirito, int vitalidade):
 			vida(vida),

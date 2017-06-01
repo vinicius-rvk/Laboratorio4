@@ -14,35 +14,6 @@
 
 
 /**
-* @brief função auxiliar para coparar data passada com data atual
-* @ppp dia
-* @ppp mes
-* @ppp ano
-* @rrr true/false
-*/
-bool check_atrasado(int dia, int mes, int ano){
-	time_t agora; // variael para pegar o tempo de maquina atual
-	struct tm * agora_struct; // cria um ponteiro de struct de data
-
-	agora = time(NULL); // função para pegar o tempo atual
-	agora_struct = localtime(&agora); // modificar o tempo para moso GTM -3
-	agora_struct->tm_year += (2017-agora_struct->tm_year); // Modifica a referencia do ao de 117 para 2017
-
-	if (ano < agora_struct->tm_year) { //faz comparação do dia e retorna true para atrasado
-		return true;
-	}
-
-	else if (mes < agora_struct->tm_mon) { //faz comparação do mes e retorna true para atrasado
-		return true;
-	}
-
-	else if (dia < agora_struct->tm_mday ) { //faz comparação do ano e retorna true para atrasado
-		return true;
-	}else{
-		return false; // retorna falso para nao atrasado
-	}
-}
-/**
 * @brief Fução de separar palavras de uma frase em varias strings
 * @ppp in string contendo a frase a ser tratada
 * @ppp &palavras Vrctor de string para guardar as palavras separadas

@@ -1,4 +1,5 @@
 #include "besta.h"
+#include "monstro.h"
 using namespace std;
 
 Besta::Besta():Monstro(){}
