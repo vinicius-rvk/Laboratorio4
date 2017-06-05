@@ -12,12 +12,14 @@ Monstro::Monstro(int vida, int forca, int espirito, int vitalidade):
 			{}
 
 	//GETTERS
-int Monstro::getVida(){return vida;}
-int Monstro::getForca(){return forca;}
-int Monstro::getEspirito(){return espirito;}
-int Monstro::getVitalidade(){return vitalidade;}
+string Monstro::getNome(){ return this->nome;}
+int Monstro::getVida(){return this->vida;}
+int Monstro::getForca(){return this->forca;}
+int Monstro::getEspirito(){return this->espirito;}
+int Monstro::getVitalidade(){return this->vitalidade;}
 
 	// SETTERS
+void Monstro::setNome(string nome){this->nome = nome;}
 void Monstro::setVida(int vida){this->vida = vida;}
 void Monstro::setForca(int forca){this->forca = forca;}
 void Monstro::setEspirito(int espirito){this->espirito = espirito;}

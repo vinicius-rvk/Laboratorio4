@@ -13,9 +13,11 @@ private:
 public:
 	Alado();
 	Alado(int, int, int, int, string, int);
-
+	
+	string getNome();
 	int getAgilidade();
 
+	void setNome(string );
 	void setAgilidade(int);
 
 	//friend ostream& operator<<(ostream&, Alado&);

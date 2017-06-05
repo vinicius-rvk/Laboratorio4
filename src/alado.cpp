@@ -14,11 +14,11 @@ Alado::Alado(int vida,
 					agilidade(agilidade)
 					{}
 
-int Alado::getAgilidade(){return this->agilidade;}
 string Alado::getNome(){return this->nome;}
+int Alado::getAgilidade(){return this->agilidade;}
+
 
 void Alado::setNome(string nome){this->nome = nome;}
-
 void Alado::setAgilidade(int agilidade){this->agilidade = agilidade;}
 
 //friend ostream& operator<<(ostream&, Alado&);
