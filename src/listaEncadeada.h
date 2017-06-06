@@ -188,7 +188,7 @@ template<typename T>
 T* Lista<T>::buscar(string s){
 	T* curr = first->getNext();
 
-	while(curr->TAG != s && curr != end){
+	while(curr->getNome() != s && curr != end){
 		curr = curr->getNext();
 	}
 	if (curr == end)
@@ -210,7 +210,7 @@ void Lista<T>::remover(string s){
 	
 	T* curr = first->getNext();
 
-	while(curr->TAG != s && curr != end){
+	while(curr->getNome() != s && curr != end){
 		curr = curr->getNext();
 	}
 

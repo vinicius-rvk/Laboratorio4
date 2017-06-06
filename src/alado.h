@@ -1,7 +1,6 @@
 #ifndef _ALADO_HPP_
 #define _ALADO_HPP_
 
-#include <iostream>
 #include "monstro.h"
 
 using namespace std;
@@ -12,6 +11,7 @@ private:
 	int agilidade;
 public:
 	Alado();
+	Alado(vector& palavras);
 	Alado(int, int, int, int, string, int);
 	
 	string getNome();

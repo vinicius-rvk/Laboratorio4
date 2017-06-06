@@ -12,6 +12,7 @@ private:
 	int magic_point;
 public:
 	Magico();
+	Magico(vector& palavras);
 	Magico(int, int, int, int, int);
 
 	string getNome();

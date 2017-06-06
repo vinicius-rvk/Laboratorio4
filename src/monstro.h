@@ -2,6 +2,8 @@
 #define _MONSTROS_H_
 
 #include <iostream>
+#include <string>
+#include <vector>
 
 using namespace std;
 
@@ -14,6 +16,7 @@ private:
 		vitalidade;
 public:
 	Monstro();
+	Monstro(vector& palavras);
 	Monstro(int vida, int forca, int espirito, int vitalidade);
 
 	//int GETTERS

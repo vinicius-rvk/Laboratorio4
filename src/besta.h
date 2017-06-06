@@ -1,7 +1,6 @@
 #ifndef _BESTAS_HPP_
 #define _BESTAS_HPP_
 
-#include <iostream>
 #include "monstro.h"
 
 using namespace std;
@@ -12,6 +11,7 @@ private:
 	int furia;
 public:
 	Besta();
+	Besta(vector& palavras);
 	Besta(int, int, int, int, string, int);
 
 	string getNome();

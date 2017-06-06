@@ -2,6 +2,7 @@
 using namespace std;
 
 Alado::Alado():Monstro(){}
+Alado::Alado(vector& palavras){}
 Alado::Alado(int vida, 
 				int forca, 
 				int espirito, 
