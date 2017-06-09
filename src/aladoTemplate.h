@@ -6,19 +6,26 @@
 
 using namespace std;
 
+template<typename T>
 class Alado: public Monstro{
 private:
 	string nome;
 	int agilidade;
+	T* next;
+	T* previous;
 public:
 	Alado();
-	Alado(int, int, int, int, string, int);
+	Alado(string, int, int, int, int, int, T*, T*);
 	
 	string getNome();
-	int getAgilidade();
+	int getEspecial();
+	T* getNext();
+	T* getPrevious();
 
 	void setNome(string );
-	void setAgilidade(int);
+	void setEspecial(int);
+	void setNext(T*);
+	void setPrevious(T*);
 
 	//friend ostream& operator<<(ostream&, Alado&);
 

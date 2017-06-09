@@ -9,25 +9,21 @@ using namespace std;
 
 class Monstro{
 private: 
-	string nome;
 	int vida,
 		forca,
 		espirito,
 		vitalidade;
 public:
 	Monstro();
-	Monstro(vector& palavras);
 	Monstro(int vida, int forca, int espirito, int vitalidade);
 
 	//int GETTERS
-	string getNome();
 	int getVida();
 	int getForca();
 	int getEspirito();
 	int getVitalidade();
 
 	//void SETTERS
-	void setNome(string );
 	void setVida(int);
 	void setForca(int);
 	void setEspirito(int);
