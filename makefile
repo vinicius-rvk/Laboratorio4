@@ -4,7 +4,7 @@
 PROG = ./bin/jogo
 CC = g++
 CPPFLAGS = -O0 -g -W -Wall -pedantic -std=c++11
-OBJS = ./src/main.o ./src/besta.o ./src/magico.o ./src/alado.o ./src/monstro.o
+OBJS = ./src/main.o ./src/besta.o ./src/magico.o ./src/alado.o ./src/monstro.o ./src/batalha.o
 
 $(PROG) : $(OBJS)
 	$(CC)  $(OBJS)  -o $(PROG)
@@ -21,7 +21,10 @@ $(PROG) : $(OBJS)
 /src/besta.o: ./src/besta.h ./src/monstro.h
 	$(CC) $(CPPFLAGS) -c ./src/besta.cpp
 
-/src/main.o: ./src/magico.h ./src/alado.h ./src/monstro.h
+/src/batalha.o: ./src/batalha.h
+	$(CC) $(CPPFLAGS) -c ./src/batalha.cpp
+
+/src/main.o: ./src/listaEncadeada.h ./src/batalha.h
 	$(CC) $(CPPFLAGS) -c ./src/main.cpp
 
 clean:

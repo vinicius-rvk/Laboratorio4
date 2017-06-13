@@ -7,20 +7,17 @@ using namespace std;
 
 class Besta: public Monstro{
 private:
-	string nome;
 	int furia;
 public:
 	Besta();
-	Besta(vector& palavras);
-	Besta(int, int, int, int, string, int);
+	Besta(vector<string>& );
+	Besta(string, int, int, int, int, int);
 
-	string getNome();
-	int getFuria();
+	int getEspecial();
 
-	void setNome(string);
-	void setFuria(int);
+	void setEspecial(int);
 
-	//friend ostream& operator<<(ostream&, Besta&);
+	friend ostream& operator<<(ostream&, Besta&);
 
 	//friend istream& operator>>(istream&, Besta&);
 

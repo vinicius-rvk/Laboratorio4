@@ -3,22 +3,36 @@
 using namespace std;
 
 Besta::Besta():Monstro(){}
-Besta::Besta(int vida, 
+Besta::Besta(vector<string>& palavras){
+
+
+	this->nome = palavras[0];
+	this->tipo = palavras[6];
+	this->vida = stoi(palavras[1]);
+	this->forca = stoi(palavras[2]);
+	this->espirito = stoi(palavras[3]);
+	this->vitalidade = stoi(palavras[4]);
+	this->furia = stoi(palavras[5]);
+
+}
+Besta::Besta(string nome,
+				int vida, 
 				int forca, 
 				int espirito, 
 				int vitalidade,
-				string nome, 
 				int furia):
-					Monstro(vida, forca, espirito, vitalidade),
+					Monstro(nome, "b", vida, forca, espirito, vitalidade),
 					furia(furia)
 					{}
 
-string Besta::getNome(){return this->nome;}
-int Besta::getFuria(){return this->furia;}
+int Besta::getEspecial(){return this->furia;}
 
-void Besta::setNome(string nome){this->nome = nome;}
-void Besta::setFuria(int furia){this->furia = furia;}
+void Besta::setEspecial(int furia){this->furia = furia;}
 
-//friend ostream& operator<<(ostream&, Magico&);
+ostream& operator<<(ostream& o, Besta& besta ){
+	o << "Nome: " << besta.getNome() << endl;
+	o << "Vida: " << besta.getVida() << endl;
+return o;
+}
 
 //friend istream& operator>>(istream&, Magico&);

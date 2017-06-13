@@ -58,6 +58,10 @@ public:
 	* @brief Costructor de uma lista de objeto generico
 	*/
 	Lista();
+	/**
+	* @brief Destrutor
+	*/
+    ~Lista();
 	//GETTERS
 	/**
     * @brief Retorna um ponteiro do objeto limitador inicial
@@ -72,6 +76,7 @@ public:
     */
 	int getQuantidade();
 	//SETTERS
+	void setQuantidade(int);
 	
 
 	//funçoes
@@ -94,28 +99,26 @@ public:
     * @brief Remove objeto da lista buscando por string
     * @param string String com o nome TAG do objeto
     */
-	void remover(string); // busca por string
+	T* remover(string); // busca por string
 	/**
     * @brief Recebe o nome do arquivo como string e faz leiura e estanciamento dos objetos
     * @param string
     */
 	void ler_banco(string );
+	
 	/**
-    * @brief Tratamento de exeção para a classe Emprestimo
-    * @param string Contendo o nome do arquivo
-    * @param Lista<Usuario> Ponteiro de uma lista de usuario
-    * @param Lista<Livros> ponteiro de uma lista de livros
+    * @brief Recebe o nome do arquivo como string e grava a partida.
+    * @param string
     */
-	void ler_emprestimo(string , Lista<Usuario>* , Lista<Livro>* );
+	void salvar(string);
 	/**
-    * @brief Função especifica para classe Emprestimos; Imprime todos os atrasados
-    */
-	void atrasados();
-
+	* @brief Retorna verdadeiro se a lista estiver vazia 
+	*/
+	bool esta_vazia();
 };
 /**
-    * @brief Cria uma lista de objeto generico
-    */
+* @brief Cria uma lista de objeto generico
+*/
 template <typename T>
 Lista<T>::Lista(){
 	this->first = new T();
@@ -128,6 +131,13 @@ Lista<T>::Lista(){
 	end->setPrevious(first);
 
 	quantidade = 0;
+
+}
+/**
+* @brief Destrutor
+*/
+template<typename T>
+Lista<T>::~Lista(){
 
 }
 //GETTERS
@@ -147,6 +157,9 @@ T* Lista<T>::getEnd(){ return end;}
 template <typename T>
 int Lista<T>::getQuantidade(){ return this->quantidade;}
 
+template<typename T>
+void Lista<T>::setQuantidade(int nova){this->quantidade = nova;} 
+
 //FUNÇOES
 /**
 * @brief Lista todos os objetos da lista
@@ -154,10 +167,17 @@ int Lista<T>::getQuantidade(){ return this->quantidade;}
 template<typename T>
 void Lista<T>::listar(){
 	T* curr = first->getNext(); //CRIA UM OBJETO PARA PERCORRER
-	cout << "INICIO DA LISTA ";
-	while(curr != end){ // PERCORRE IMPRIMINDO ENQUANTO NAO CHEGAR AO FINAL DA LISTA
+	cout << "INICIO DA LISTA DE MONSTROS";
+	int i = 0;
+	while(curr != end &&  this->quantidade > i++){ // PERCORRE IMPRIMINDO ENQUANTO NAO CHEGAR AO FINAL DA LISTA
 		cout << "-----------" << endl;
-		cout << *curr << endl << endl;
+		if(curr->getTipo() == "a"){
+			cout << *((Alado*)curr) << endl << endl;
+		}else if(curr->getTipo() == "b"){
+			cout << *((Besta*)curr) << endl << endl;
+		}else if(curr->getTipo() == "m"){
+			cout << *((Magico*)curr) << endl << endl;
+		}
 		curr = curr->getNext();
 	}
 	cout << "FIM DA LISTA ----------------" << endl << endl;
@@ -187,18 +207,17 @@ void Lista<T>::inserir(T* novo){
 template<typename T>
 T* Lista<T>::buscar(string s){
 	T* curr = first->getNext();
-
-	while(curr->getNome() != s && curr != end){
+	int i = 0;
+	while(curr->getNome() != s && curr != end && this->quantidade > i++){
 		curr = curr->getNext();
 	}
 	if (curr == end)
 	{
-		return NULL;
+		cout << "Não existe esse monstro." << endl;
+		return curr;
+	}else{
+		return curr;
 	}
-
-
-
-	return curr; // retornar T
 }
 
  /**
@@ -206,7 +225,7 @@ T* Lista<T>::buscar(string s){
     * @param s String com o nome do objeto generico a ser removido
     */
 template <typename T>
-void Lista<T>::remover(string s){
+T* Lista<T>::remover(string s){
 	
 	T* curr = first->getNext();
 
@@ -214,9 +233,12 @@ void Lista<T>::remover(string s){
 		curr = curr->getNext();
 	}
 
-	unlink(curr);
+	curr->getNext()->setPrevious(curr->getPrevious());
+	curr->getPrevious()->setNext(curr->getNext());
+
 	delete curr;
 	quantidade--;
+	return curr;
 
 } 
 /**
@@ -235,74 +257,60 @@ void Lista<T>::ler_banco(string arq){
 
 			tratar_texto(linha, palavras);  // trata a linha do banco de dados
 			
-			T* novo_node = new T(palavras); //Cria novo objeto
-			
+			//T* novo_node = new T(palavras); //Cria novo objeto
+			T* novo;
+			if(palavras[6] == "a"){
+				novo = new Alado(palavras);
+			}
+			else if(palavras[6] == "m"){
+				novo = new Magico(palavras);
+			}
+			else if(palavras[6] == "b"){
+				novo = new Besta(palavras);
+			}
+			inserir(novo);
 			palavras.erase(palavras.begin(), palavras.end()); // limpa o vector
-			inserir(novo_node);
-		}
-
+			}
 		arquivo.close();
-
 	}
 	else{
-		cout << "ARQUIVO NAO ABRIU!" << endl;
+		cout << "ARQUIVO "<< arq <<" NAO ABRIU!" << endl;
 	}
 }
-/**
-* @brief Função especifica para leitura de objetos do tipo Emprestimo
-* @param arq Nome do arquivo a ser lido
-* @param usuario Lista de usuarios
-* @param livros Lista de livros
-*/
 template<typename T>
-void Lista<T>::ler_emprestimo(string arq,
-								 Lista<Usuario>* usuarios,
-								  Lista<Livro>* livros ){
-								
-	fstream arquivo(arq);
-	string linha;
-
-	if(arquivo.is_open()){
-		while(getline(arquivo, linha)){
-			//cria um vector temporario para armazenar a linha tratada
-			vector<string> palavras;
-			// trata a linha do banco de dados
-			tratar_texto(linha, palavras);
-			//Criar objeto
-			T* novo_node = new T(usuarios->buscar(palavras[0]), livros->buscar(palavras[1]), stoi(palavras[2]), stoi(palavras[3]), stoi(palavras[4]));
-			// limpa o vector
-			palavras.erase(palavras.begin(), palavras.end());
-			inserir(novo_node);
+void Lista<T>:: salvar(string arq){
+	ofstream arquivo(arq);
+	T* curr = this->first->getNext();
+	
+	while(curr != this->end ){
+		arquivo << curr->getNome() <<";";
+		arquivo << curr->getVida() <<";";
+		arquivo << curr->getForca() <<";";
+		arquivo << curr->getEspirito() <<";";
+		arquivo << curr->getVitalidade() <<";";
+		
+		if(curr->getTipo() == "a"){
+			arquivo << ((Alado*)curr)->getEspecial();
 		}
-
-		arquivo.close();
-
-	}
-	else{
-		cout << "ARQUIVO NAO ABRIU!" << endl;
-	}
-}
-/**
-* @brief Função especifica para Emprestimos; Lista todos os emprestimos atrasados
-*/
-template<typename T>
-void Lista<T>::atrasados(){
-
-	T* curr = first->getNext();
-
-	while(curr != end){
-		if(check_atrasado(curr->getDia(), curr->getMes(), curr->getAno())){
-			char barra = '/';
-			cout << "Usuario: " << curr->getUsuario()->getNome() << endl
-				 << "Livro: " << curr->getLivro()->getTitulo() << endl
-				 << "Devolução atrasada desde " 
-				 << curr->getDia()<< barra
-				 << curr->getMes()<< barra
-				 << curr->getAno()<< endl << endl;
+		else if(curr->getTipo() == "m"){
+			arquivo << ((Magico*)curr)->getEspecial();
 		}
+		else if(curr->getTipo() == "b"){
+			arquivo << ((Besta*)curr)->getEspecial();
+		}
+		arquivo << ";";
+		arquivo << curr->getTipo();
+		arquivo << endl;
 		curr = curr->getNext();
 	}
 
-
+}
+template<typename T>
+bool Lista<T>::esta_vazia(){
+	T* teste = first->getNext();
+	if(teste == end)
+		return true;
+	else
+		return false;
 }
 #endif // fim da definição _LISTAENCADEADA_H_
