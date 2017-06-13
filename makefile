@@ -9,6 +9,9 @@ OBJS = ./src/main.o ./src/besta.o ./src/magico.o ./src/alado.o ./src/monstro.o .
 $(PROG) : $(OBJS)
 	$(CC)  $(OBJS)  -o $(PROG)
 
+/src/main.o: ./src/batalha.h
+	$(CC) $(CPPFLAGS) -c ./src/main.cpp
+
 /src/monstro.o: ./src/monstro.h
 	$(CC) $(CPPFLAGS) -c ./src/monstro.cpp
 
@@ -21,11 +24,8 @@ $(PROG) : $(OBJS)
 /src/besta.o: ./src/besta.h ./src/monstro.h
 	$(CC) $(CPPFLAGS) -c ./src/besta.cpp
 
-/src/batalha.o: ./src/batalha.h
+/src/batalha.o: ./src/batalha.h  -I ./src/listaEncadeada.h 
 	$(CC) $(CPPFLAGS) -c ./src/batalha.cpp
-
-/src/main.o: ./src/listaEncadeada.h ./src/batalha.h
-	$(CC) $(CPPFLAGS) -c ./src/main.cpp
 
 clean:
 	rm -f core $(OBJS)

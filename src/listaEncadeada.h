@@ -6,6 +6,7 @@
 #ifndef _LISTA_H_ // Uso do pré-processador
 #define _LISTA_H_ // Definição do identificador do cabeçalho
 
+#include <iostream>
 #include "alado.h"
 #include "besta.h"
 #include "magico.h"
@@ -14,34 +15,6 @@
 #include <fstream>
 
 
-/**
-* @brief Fução de separar palavras de uma frase em varias strings
-* @ppp in string contendo a frase a ser tratada
-* @ppp &palavras Vrctor de string para guardar as palavras separadas
-*/
-void tratar_texto(string in, vector<string>& palavras){
-
-	int i =0, j = 0;
-	string guarda;
-
-	do{ 
-		if(in[i] == ';'){
-			//guarda += '\0';
-			palavras.push_back(guarda);
-			guarda = "";
-			j++;
-		}else{
-			guarda += in[i];
-			
-		}
-		j++;
-		i++;
-
-		
-	}while(in[i] != '\0');
-
-	palavras.push_back(guarda);
-}
 /**
 * @class Lista
 * @brief objeto generico com a finalidade de criar e manipular lista de qualquer objeto.
@@ -81,6 +54,13 @@ public:
 
 	//funçoes
 	/**
+	* @brief Fução de separar palavras de uma frase em varias strings
+	* @ppp in string contendo a frase a ser tratada
+	* @ppp &palavras Vrctor de string para guardar as palavras separadas
+	*/
+	void tratar_texto(string , vector<string>& );
+
+	/**
     * @brief Lista todos os objetos da lista
     */
 	void listar();
@@ -99,7 +79,7 @@ public:
     * @brief Remove objeto da lista buscando por string
     * @param string String com o nome TAG do objeto
     */
-	T* remover(string); // busca por string
+	void remover(string); // busca por string
 	/**
     * @brief Recebe o nome do arquivo como string e faz leiura e estanciamento dos objetos
     * @param string
@@ -161,6 +141,39 @@ template<typename T>
 void Lista<T>::setQuantidade(int nova){this->quantidade = nova;} 
 
 //FUNÇOES
+
+/**
+* @brief Fução de separar palavras de uma frase em varias strings
+* @ppp in string contendo a frase a ser tratada
+* @ppp &palavras Vrctor de string para guardar as palavras separadas
+*/
+template<typename T>
+void Lista<T>::tratar_texto(string in, vector<string>& palavras){
+
+	int i =0, j = 0;
+	string guarda;
+
+	do{ 
+		if(in[i] == ';'){
+			//guarda += '\0';
+			palavras.push_back(guarda);
+			guarda = "";
+			j++;
+		}else{
+			guarda += in[i];
+			
+		}
+		j++;
+		i++;
+
+		
+	}while(in[i] != '\0');
+
+	palavras.push_back(guarda);
+}
+
+
+
 /**
 * @brief Lista todos os objetos da lista
 */
@@ -225,7 +238,7 @@ T* Lista<T>::buscar(string s){
     * @param s String com o nome do objeto generico a ser removido
     */
 template <typename T>
-T* Lista<T>::remover(string s){
+void Lista<T>::remover(string s){
 	
 	T* curr = first->getNext();
 
@@ -238,7 +251,7 @@ T* Lista<T>::remover(string s){
 
 	delete curr;
 	quantidade--;
-	return curr;
+	
 
 } 
 /**
@@ -280,6 +293,7 @@ void Lista<T>::ler_banco(string arq){
 template<typename T>
 void Lista<T>:: salvar(string arq){
 	ofstream arquivo(arq);
+
 	T* curr = this->first->getNext();
 	
 	while(curr != this->end ){
@@ -288,6 +302,12 @@ void Lista<T>:: salvar(string arq){
 		arquivo << curr->getForca() <<";";
 		arquivo << curr->getEspirito() <<";";
 		arquivo << curr->getVitalidade() <<";";
+
+		cout << curr->getNome() <<";";
+		cout << curr->getVida() <<";";
+		cout << curr->getForca() <<";";
+		cout << curr->getEspirito() <<";";
+		cout << curr->getVitalidade() <<";";
 		
 		if(curr->getTipo() == "a"){
 			arquivo << ((Alado*)curr)->getEspecial();
